@@ -86,6 +86,7 @@ Based on the findings from the analysis, here are several recommendations for Be
 ## Data Visualization
 
 ### Tools Used:
+- Link: https://public.tableau.com/views/BellabeatProject_17370932150140/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
 - **Tableau** was used to visualize the data and communicate the insights in an easily digestible format.
 
 ### Visualizations Created:
