@@ -1,0 +1,40 @@
+-----calculate the number of days each user tracked physical activity
+
+SELECT
+    Id,
+    COUNT(ActivityDate) AS days_activity_recorded
+FROM (
+    SELECT DISTINCT
+        Id,
+        ActivityDate
+    FROM
+        bellabeat.dbo.daily_activity_cleaned
+) AS distinct_activity_dates
+GROUP BY
+    Id
+ORDER BY
+    days_activity_recorded DESC;
+
+---- calculate aveerage days user track their physical activity
+SELECT
+    AVG(days_activity_recorded) AS average_days_activity_recorded
+FROM (
+    SELECT
+        COUNT(DISTINCT ActivityDate) AS days_activity_recorded
+    FROM
+        bellabeat.dbo.daily_activity_cleaned
+    GROUP BY
+        Id
+) AS subquery;
+
+
+
+------calculate average minutes for each activity
+
+SELECT 
+	ROUND(AVG(VeryActiveMinutes),2) AS AverageVeryActiveMinutes,
+	ROUND(AVG(FairlyActiveMinutes),2) AS AverageFairlyActiveMinutes,
+	ROUND(AVG(LightlyActiveMinutes)/60.0,2) AS AverageLightlyActiveHours,
+	ROUND(AVG(SedentaryMinutes)/60.0,2) AS AverageSedentaryHours
+FROM
+	bellabeat.dbo.daily_activity_cleaned
