@@ -20,6 +20,10 @@ The dataset consists of data from **33 individuals** over the course of **one mo
 
 ## Data Preparation & Cleaning
 
+## SQL Queries
+The SQL queries used for cleaning and analyzing the data are stored in the [queries.sql](./queries.sql) file.
+
+
 ### 1. Importing and Merging Data:
 The data was imported using **SQL Server Management Studio (SSMS)** for large-scale cleaning, and **Excel** was used for merging multiple sheets into a single dataset. 
 
