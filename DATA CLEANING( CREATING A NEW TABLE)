@@ -1,5 +1,5 @@
 
------- CREATING THE NEW CLEANED TABLE AND INSERTING THE DATA from daily_activity--------------- WIRITNG THIS CODE FOR DROPPING THE TABLE SO THAT I CAN AVOID DUPLICATING THE TABLE IN CASE I RERUN THE QUERY.
+------ CREATING THE NEW CLEANED TABLE AND INSERTING THE DATA from daily_activity--------------- 
 
 --Even if a NVARCHAR(50) column contains numeric values, you cannot perform mathematical operations like SUM() directly on it because it's treated as a string so we creatd this table to remove navchar.
 
