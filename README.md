@@ -26,8 +26,7 @@ The SQL queries used in this project are organized into different files based on
 - [data_cleaning.sql](https://github.com/ABT9841/bellabeat-capstone-project/blob/main/DATA%20CLEANING(%20CREATING%20A%20NEW%20TABLE)): Queries for cleaning the raw data and created a table
 - [data_analysis.sql](https://github.com/ABT9841/bellabeat-capstone-project/blob/main/ANALAYIZING%20(NUMBER%20OF%20USERS%20AND%20DAILY%20AVERAGES)): Queries to calculating number of users and daily avaerages
 - [data_analysis.sql](https://github.com/ABT9841/bellabeat-capstone-project/blob/main/DATA%20ANALYZING%20(DAYS%20EACH%20USER%20TRACK%20PHYSICAL%20ACTIVITY)): Queries to calculate the number of days each user tracked physical activity
-- [data_analysis.sql](https://github.com/ABT9841/bellabeat-capstone-project/blob/main/ANALYZING%20(DAYS%20AND%20MINUTES%20TRACKING%20)): Queries to calculate the number of days each user tracked physical activity
-
+- [data_analysis.sql](https://github.com/ABT9841/bellabeat-capstone-project/blob/main/ANALYZE%20(ACTIVE%20TIME)): Queries to determine time when users were mostly active
 
 
 
