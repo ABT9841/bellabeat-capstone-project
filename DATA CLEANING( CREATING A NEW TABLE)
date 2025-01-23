@@ -1,0 +1,40 @@
+
+------ CREATING THE NEW CLEANED TABLE AND INSERTING THE DATA from daily_activity--------------- WIRITNG THIS CODE FOR DROPPING THE TABLE SO THAT I CAN AVOID DUPLICATING THE TABLE IN CASE I RERUN THE QUERY.
+
+--Even if a NVARCHAR(50) column contains numeric values, you cannot perform mathematical operations like SUM() directly on it because it's treated as a string so we creatd this table to remove navchar.
+
+CREATE TABLE  bellabeat.dbo.daily_activity_cleaned
+(ID FLOAT, ActivityDate DATETIME2(7), TotalSteps INT, TotalDistance FLOAT,  VeryActiveDistance FLOAT,
+ModeratelyActiveDistance FLOAT, LightActiveDistance FLOAT, SedentaryActiveDistance FLOAT, VeryActiveMinutes INT, FairlyActiveMinutes INT, LightlyActiveMinutes INT, 
+SedentaryMinutes INT, Calories   FLOAT) -- TRACKERDISTANCE AND LOGGED ACTIVITIES HAD NO USE. SO DIDNT INCLUDE IN NEWLY CREATED TABLE.
+
+-- Inserting cleaned data into the new table from the old table (dailyActivity)
+INSERT INTO bellabeat.dbo.daily_activity_cleaned
+(ID , ActivityDate , TotalSteps , TotalDistance,  VeryActiveDistance,
+ModeratelyActiveDistance , LightActiveDistance , SedentaryActiveDistance , VeryActiveMinutes, FairlyActiveMinutes, LightlyActiveMinutes, 
+SedentaryMinutes , Calories )
+
+SELECT
+ID,
+ActivityDate,
+TotalSteps,
+CAST(TotalDistance AS FLOAT) AS TotalDistance, -- CONVERTING THE ANYDATYPE IT WAS BEFORE TO FLOAT DATATYPE AND RENAMING THE COLUMN NAME.
+CAST(VeryActiveDistance AS FLOAT) AS VeryActiveDistance,
+CAST(ModeratelyActiveDistance AS FLOAT) AS LightActiveDistance,
+CAST(LightActiveDistance AS FLOAT) AS  LightActiveDistance, 
+CAST(SedentaryActiveDistance  AS FLOAT) AS SedenataryActiveDistance , 
+VeryActiveMinutes,
+FairlyActiveMinutes,
+LightlyActiveMinutes, 
+SedentaryMinutes,
+Calories
+
+FROM 
+	bellabeat.dbo.dailyActivity
+	
+-- to check if the data is inserted into new table.
+SELECT * FROM bellabeat.dbo.daily_activity_cleaned;
+
+
+
+
