@@ -11,13 +11,13 @@ This repository contains the Bellabeat case study, completed as part of my data 
 ## Tools Used
 - **SQL**: For data exploration and querying.
 - **Excel**: For initial data cleaning and preprocessing.
-- **Google Sheets**: For collaborative analysis and calculations.
 - **Tableau**: For creating interactive dashboards and visualizing trends.
+- **Google Slides**: For presentation slides.
 
 ## Steps Taken
 
 ### 1. **Data Cleaning**
-- Cleaned and prepared raw data using Excel and Google Sheets.
+- Cleaned and prepared raw data using Excel and merged the sheets for easily analysis in sql.
 - Addressed missing values and ensured consistency in the dataset.
 
 ### 2. **Data Analysis**
