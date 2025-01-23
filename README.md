@@ -8,6 +8,7 @@ This repository contains the Bellabeat case study as part of my data analytics p
 ### Business Task:
 The goal of this analysis is to provide insights into how consumers use non-Bellabeat smart devices (specifically Fitbit data) to help Bellabeat make data-driven business decisions. The analysis focuses on understanding user activity patterns and providing recommendations for improving user engagement with the Bellabeat app.
 
+### Dataset: From Kaggle https://www.kaggle.com/datasets/kyle007hendricks/bellabeat-dataset
 ### Dataset Overview:
 The dataset consists of data from **33 individuals** over the course of **one month**, collected via Fitbit devices. The data includes various activity metrics such as step count, heart rate, intensity, calories burned, and more. The dataset has several limitations:
 - **Small sample size** of only 33 individuals.
