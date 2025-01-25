@@ -62,6 +62,7 @@ Once imported, I created cleaned versions of the data to improve data quality:
 
 ### 1. Activity Analysis:
 The analysis aimed to understand the activity patterns of users by calculating key metrics such as:
+- **What Activity** is tracked most by user.
 - **Average Intensity** for each hour of the day.
 - **Correlation between activity and calories burned.**
 - **Identifying the most active times** of the day for users.
