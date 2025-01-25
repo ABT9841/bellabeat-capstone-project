@@ -72,6 +72,7 @@ The analysis aimed to understand the activity patterns of users by calculating k
   - Joins were made between the `hourly_activity` and `minutesMETsNarrow` tables to analyze activity intensity and calories burned.
 
 ### 2. Key Findings:
+- ** People Tracking Activit:** People mostly tracked the physical activity more than any other activity.
 - **Peak Activity Time:** Users were most active around **6 PM** each day, while the least active time was around **3 AM**.
 - **Intensity and Calories Burned:** Higher activity intensity was strongly correlated with increased calories burned. This suggests that users engaging in more intense activity are burning more calories.
 - **Sedentary Behavior:** The data revealed that **81% of users' time was sedentary**, indicating a need for improved strategies to combat inactivity.
