@@ -1,40 +1,97 @@
+/*Cleaning process: I Merged different CSV files of daily activities using Excel Power Query.
+I then uploaded the CSV files and Excel files to Microsoft SQL Server. Some values were imported as strings instead of floats*/
 
------- CREATING THE NEW CLEANED TABLE AND INSERTING THE DATA from daily_activity--------------- 
+-- Creating cleaned daily activity table
+IF OBJECT_ID('fitabase.dbo.dailyActivityCleaned', 'U') IS NOT NULL
+    DROP TABLE fitabase.dbo.dailyActivityCleaned;
 
---Even if a NVARCHAR(50) column contains numeric values, you cannot perform mathematical operations like SUM() directly on it because it's treated as a string so we creatd this table to remove navchar.
+CREATE TABLE fitabase.dbo.dailyActivityCleaned (
+    Id FLOAT, 
+    ActivityDate DATETIME2(7), 
+    TotalSteps FLOAT, 
+    TotalDistance FLOAT, 
+    LoggedActiveDistance FLOAT,
+    VeryActiveDistance FLOAT, 
+    ModeratelyActiveDistance FLOAT, 
+    LightlyActiveDistance FLOAT, 
+    SedentaryActiveDistance FLOAT, 
+    VeryActiveMinutes FLOAT, 
+    FairlyActiveMinutes FLOAT, 
+    LightlyActiveMinutes FLOAT, 
+    SedentaryActiveMinutes FLOAT,
+    Calories FLOAT
+);
 
-CREATE TABLE  bellabeat.dbo.daily_activity_cleaned
-(ID FLOAT, ActivityDate DATETIME2(7), TotalSteps INT, TotalDistance FLOAT,  VeryActiveDistance FLOAT,
-ModeratelyActiveDistance FLOAT, LightActiveDistance FLOAT, SedentaryActiveDistance FLOAT, VeryActiveMinutes INT, FairlyActiveMinutes INT, LightlyActiveMinutes INT, 
-SedentaryMinutes INT, Calories   FLOAT) -- TRACKERDISTANCE AND LOGGED ACTIVITIES HAD NO USE. SO DIDNT INCLUDE IN NEWLY CREATED TABLE.
+-- Inserting cleaned data
+INSERT INTO fitabase.dbo.dailyActivityCleaned
+SELECT 
+    Id,
+    ActivityDate,
+    CAST(TotalSteps AS FLOAT),
+    CAST(TotalDistance AS FLOAT),
+    CAST(LoggedActivitiesDistance AS FLOAT) AS LoggedActiveDistance,
+    CAST(VeryActiveDistance AS FLOAT),
+    CAST(ModeratelyActiveDistance AS FLOAT),
+    CAST(LightlyActiveDistance AS FLOAT),
+    CAST(SedentaryActiveDistance AS FLOAT),
+    CAST(VeryActiveMinutes AS FLOAT),
+    CAST(FairlyActiveMinutes AS FLOAT),
+    CAST(LightlyActiveMinutes AS FLOAT),
+    CAST(SedentaryMinutes AS FLOAT),
+    CAST(Calories AS FLOAT)
+FROM fitabase.dbo.dailyActivity;
 
--- Inserting cleaned data into the new table from the old table (dailyActivity)
-INSERT INTO bellabeat.dbo.daily_activity_cleaned
-(ID , ActivityDate , TotalSteps , TotalDistance,  VeryActiveDistance,
-ModeratelyActiveDistance , LightActiveDistance , SedentaryActiveDistance , VeryActiveMinutes, FairlyActiveMinutes, LightlyActiveMinutes, 
-SedentaryMinutes , Calories )
+--- Creating another table showing the number of days each user tracked their physical activity
 
+-- Creating trackedDays table
+IF OBJECT_ID('fitabase.dbo.trackedDays', 'U') IS NOT NULL
+    DROP TABLE fitabase.dbo.trackedDays;
+
+CREATE TABLE fitabase.dbo.trackedDays (
+    Id FLOAT, 
+    days_activity_recorded INT
+);
+
+INSERT INTO fitabase.dbo.trackedDays
 SELECT
-ID,
-ActivityDate,
-TotalSteps,
-CAST(TotalDistance AS FLOAT) AS TotalDistance, -- CONVERTING THE ANYDATYPE IT WAS BEFORE TO FLOAT DATATYPE AND RENAMING THE COLUMN NAME.
-CAST(VeryActiveDistance AS FLOAT) AS VeryActiveDistance,
-CAST(ModeratelyActiveDistance AS FLOAT) AS LightActiveDistance,
-CAST(LightActiveDistance AS FLOAT) AS  LightActiveDistance, 
-CAST(SedentaryActiveDistance  AS FLOAT) AS SedenataryActiveDistance , 
-VeryActiveMinutes,
-FairlyActiveMinutes,
-LightlyActiveMinutes, 
-SedentaryMinutes,
-Calories
+    Id,
+    COUNT(ActivityDate) OVER (PARTITION BY Id) AS days_activity_recorded
+FROM fitabase.dbo.dailyActivity
+ORDER BY days_activity_recorded DESC;
 
-FROM 
-	bellabeat.dbo.dailyActivity
-	
--- to check if the data is inserted into new table.
-SELECT * FROM bellabeat.dbo.daily_activity_cleaned;
+/* Creating 2 new tables summarizing sleep monitoring data.
+These tables are created so they can be joined and used in the analysis */
 
+-- Creating summarySleepDay table
+IF OBJECT_ID('fitabase.dbo.summarySleepDay', 'U') IS NOT NULL
+    DROP TABLE fitabase.dbo.summarySleepDay;
 
+CREATE TABLE fitabase.dbo.summarySleepDay (
+    Id FLOAT, 
+    TotalMinutesInBed INT, 
+    TotalMinutesAsleep INT
+);
 
+INSERT INTO fitabase.dbo.summarySleepDay
+SELECT
+    Id,
+    SUM(TotalTimeInBed),
+    SUM(TotalMinutesAsleep)
+FROM fitabase.dbo.sleepDay
+GROUP BY Id;
 
+-- Creating summaryRestless table
+IF OBJECT_ID('fitabase.dbo.summaryRestless', 'U') IS NOT NULL
+    DROP TABLE fitabase.dbo.summaryRestless;
+
+CREATE TABLE fitabase.dbo.summaryRestless (
+    Id FLOAT, 
+    TotalMinutesRestless INT
+);
+
+INSERT INTO fitabase.dbo.summaryRestless
+SELECT 
+    DISTINCT Id, 
+    COUNT(value) OVER (PARTITION BY Id) AS TotalMinutesRestless
+FROM fitabase.dbo.minuteSleep_state
+WHERE value = 2;
