@@ -15,6 +15,7 @@ The dataset consists of data from **33 individuals** over the course of **one mo
 - **Short duration** of just one month.
 - Missing **demographic information** such as gender.
 - Data is limited to **Fitbit** devices, excluding other smart devices users may have.
+- Fitbit users may already be health-conscious, which might skew results.
 
 ---
 
@@ -101,6 +102,8 @@ Based on the findings from the analysis, here are several recommendations for Be
 ### Tools Used:
 - Link: https://public.tableau.com/views/BellabeatProject_17370932150140/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
 - **Tableau** was used to visualize the data and communicate the insights in an easily digestible format.
+- ![Tableau Dashboard](images/dashboard-screenshot.png)
+
 
 ### Visualizations Created:
 - **Hourly Activity Patterns:** A visualization of activity levels throughout the day to highlight peak times (6 PM) and low activity times (3 AM).
